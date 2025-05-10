@@ -1,0 +1,7 @@
+---
+description: uv による依存管理
+globs: pyproject.toml
+---
+- 依存関係の追加・削除は必ず `uv add`, `uv remove` コマンドを使用する
+- 開発依存は `uv add --dev <PACKAGE>`、Optional は `uv add --optional <GROUP> <PACKAGE>` を利用する
+- 仮想環境への反映は `uv sync --all-groups` で行う
