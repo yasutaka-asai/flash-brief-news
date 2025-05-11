@@ -1,7 +1,24 @@
 [project]
-name = "my-news-agent"
+name = "news-summarizer"
 version = "0.1.0"
-description = "Add your description here"
+description = "最新ニュースを自動的に収集し要約するシステム"
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "langchain>=0.1.0",
+    "langchain-openai>=0.0.2",
+    "langchain-community>=0.0.13",
+    "python-dotenv>=1.0.0",
+    "requests>=2.31.0",
+    "schedule>=1.2.0",
+    "google-api-python-client>=2.169.0",
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]
