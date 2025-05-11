@@ -10,7 +10,8 @@ from langchain.prompts import PromptTemplate
 from news_summarizer.utils import (
     AZURE_OPENAI_API_KEY,
     AZURE_OPENAI_ENDPOINT,
-    AZURE_OPENAI_DEPLOYMENT_NAME
+    AZURE_OPENAI_DEPLOYMENT_NAME,
+    AZURE_OPENAI_API_VERSION
 )
 
 
@@ -23,6 +24,7 @@ class NewsSummarizer:
             api_key=AZURE_OPENAI_API_KEY,
             azure_endpoint=AZURE_OPENAI_ENDPOINT,
             azure_deployment=AZURE_OPENAI_DEPLOYMENT_NAME,
+            api_version=AZURE_OPENAI_API_VERSION,
             temperature=0.3
         )
         
