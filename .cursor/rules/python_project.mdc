@@ -1,0 +1,37 @@
+---
+description: Python プロジェクト用 Project Rules
+globs: "src/**/*.py", "tests/**/*.py"
+---
+
+- **プロジェクト構造**: ルートに `src/`, `tests/` を配置し、名前空間パッケージを使用する。  
+- **PEP8 準拠**: `black`, `flake8` による自動整形と検査を導入し、公式ガイドに従う。  
+- **型ヒント**: Python の型ヒントを用い、`mypy` で静的型チェックを行う。  
+- **ドキュメンテーション**: PEP257 形式の docstring を記述し、`Sphinx` で API ドキュメントを生成する。  
+- **モジュール分割とディレクトリ構造**:
+  - 各機能ごとにサブパッケージを作成し、`__init__.py` で公開 API を管理する
+  - 1 ファイルあたり最大 200 行を目安とし、責務を明確化する
+  - テストは `tests/` 以下に同構成で配置し、pytest が自動検出できるようにする
+- **依存管理**:  
+  - **uv** を採用し、`uv init` でプロジェクトを初期化。  
+  - 依存関係の追加・削除は必ず `uv add`, `uv remove` コマンドを使用する
+  - 開発依存は `uv add --dev <PACKAGE>`、Optional は `uv add --optional <GROUP> <PACKAGE>` を利用する
+  - 仮想環境への反映は `uv sync --all-groups` で行う
+  - 生成される `uv.lock` を必ずコミットし、再現性を担保。  
+  - レジストリ設定やキャッシュパスは `uv config registry.url <URL>`、`uv config cache-dir .cache/uv` などでカスタマイズ。  
+- **仮想環境**: `uv venv create` で自動生成される仮想環境を使用し、環境の再現性を保証する。  
+- **テスト**: 
+  - テスト駆動開発(TDD)を実施し、新規機能は必ずテストコードを先行して作成する
+  - テストフレームワークは pytest を使用し、命名規則は `test_<module>_<feature>` とする
+  - `conftest.py` でフィクスチャ管理、テストは機能別に `tests/` 以下に配置。  
+  - Cursor の `/Generate tests` 機能でテスト雛形を生成し、実装はテストが失敗する状態から進める
+- **CI/CD**: GitHub Actions や GitLab CI で以下を順次実行：  
+  1. `uv install --ci`  
+  2. `black --check`  
+  3. `flake8`  
+  4. `mypy --strict`  
+  5. `pytest --cov`  
+- **ASGI サーバー**: `uvicorn` は `--reload` でホットリロード、`--workers` で並列処理、`--factory` でアプリ生成を指定。  
+- **命名規則**: モジュール・パッケージは小文字スネークケース、クラスは CapWords、関数・変数はスネークケース。  
+- **セキュリティ**: `.env` 管理とし、`git-secrets` や `pre-commit` フックで機密情報のコミットを防止する。  
+- **テストカバレッジ**: `coverage.py` で最低 80% を維持。  
+- **コミット規約**: Conventional Commits を採用し、`type(scope): description` 形式でコミットを統一する。  

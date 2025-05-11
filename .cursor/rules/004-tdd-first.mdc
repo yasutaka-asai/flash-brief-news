@@ -1,7 +1,0 @@
----
-description: テスト駆動開発（TDD）
-globs: src/**/*.py
----
-- 新規機能は必ずテストコードを先行して作成する
-- テストフレームワークは pytest を使用し、命名規則は `test_<module>_<feature>` とする
-- Cursor の `/Generate tests` 機能でテスト雛形を生成し、実装はテストが失敗する状態から進める
