@@ -40,6 +40,7 @@ class NewsReportGenerator:
         # 各トピックについてニュースを収集
         for topic in self.topics:
             news = self.collector.get_latest_news(topic, results_per_topic)
+            
             all_news.extend(news)
         
         # 重複を除去（URLベース）
